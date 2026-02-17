@@ -28,12 +28,18 @@ git clone https://github.com/leonelthiesen/media-server.git
 cd media-server
 ```
 
-2. Start all services:
+2. (Optional) Create a `.env` file to customize settings:
+```bash
+cp .env.example .env
+# Edit .env with your preferred values
+```
+
+3. Start all services:
 ```bash
 docker-compose up -d
 ```
 
-3. Access the services at:
+4. Access the services at:
    - qBittorrent: http://localhost:8080
      - Default credentials: admin / adminadmin
    - Jackett: http://localhost:9117
@@ -46,12 +52,17 @@ docker-compose up -d
 
 ### Environment Variables
 
-The services use the following default environment variables:
+The services use the following default environment variables (can be customized via `.env` file):
 - `PUID=1000` - User ID for file permissions
 - `PGID=1000` - Group ID for file permissions
 - `TZ=Etc/UTC` - Timezone (change to your local timezone, e.g., `America/New_York`)
+- `CONFIG_PATH=./config` - Base path for configuration files
+- `DOWNLOADS_PATH=./downloads` - Path for downloads
+- `MOVIES_PATH=./media/movies` - Path for movie library
+- `TV_PATH=./media/tv` - Path for TV show library
+- `QBITTORRENT_WEBUI_PORT=8080` - qBittorrent web UI port
 
-To customize these values, edit the `docker-compose.yml` file.
+To customize these values, copy `.env.example` to `.env` and edit the values.
 
 ### Volume Mappings
 
