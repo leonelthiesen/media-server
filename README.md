@@ -148,18 +148,37 @@ docker-compose restart <service-name>
 ## Troubleshooting
 
 ### Permission Issues
-If you encounter permission errors, adjust the PUID and PGID values in docker-compose.yml to match your user:
+If you encounter permission errors, adjust the PUID and PGID values in your `.env` file to match your user:
 ```bash
 id -u  # Get your PUID
 id -g  # Get your PGID
 ```
 
+Then update your `.env` file:
+```
+PUID=1001  # Your user ID
+PGID=1001  # Your group ID
+```
+
+Restart the services after making changes:
+```bash
+docker-compose down
+docker-compose up -d
+```
+
 ### Port Conflicts
-If any ports are already in use, modify the port mappings in docker-compose.yml. Change the left side of the mapping:
+If any ports are already in use, you can modify them using environment variables in your `.env` file. For example, to change the qBittorrent web UI port:
+```
+QBITTORRENT_WEBUI_PORT=9080
+```
+
+For services without environment variable support, modify the port mappings in `docker-compose.yml`. Change the left side of the mapping:
 ```yaml
 ports:
-  - "9080:8080"  # Use port 9080 instead of 8080
+  - "9117:9117"  # Change 9117 to your preferred port
 ```
+
+Restart the services after making changes.
 
 ### Network Issues
 Services communicate using the internal `media-network`. Ensure you use container names (e.g., `qbittorrent`, `jackett`) when configuring inter-service connections.
