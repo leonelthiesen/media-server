@@ -1,0 +1,17 @@
+# Docker volumes and data
+config/
+downloads/
+media/
+
+# Docker Compose override files
+docker-compose.override.yml
+
+# Environment files
+.env
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
